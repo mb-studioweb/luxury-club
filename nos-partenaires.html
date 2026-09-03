@@ -475,32 +475,122 @@ body.body.dark .lc-btn-details:hover {
   color: rgba(255,255,255,0.65) !important; font-size: 0.85rem; text-decoration: none !important;
 }
 .lc-vehicle-back:hover { color: #fff !important; }
+
+/* Vehicle CTA contrast */
+.lc-vehicle-cta .button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.85rem 1.25rem !important;
+  background: #fff !important;
+  color: #111 !important;
+  border: 1px solid #fff !important;
+  text-decoration: none !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+.lc-vehicle-cta .button .button_text { color: #111 !important; }
+.lc-vehicle-cta .button.is--secondary {
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.55) !important;
+}
+.lc-vehicle-cta .button.is--secondary .button_text { color: #fff !important; }
+.lc-vehicle-cta .button:hover { opacity: 0.9; }
+.lc-vehicle-gallery {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.85rem !important;
+}
+.lc-vehicle-gallery img {
+  width: 100% !important;
+  min-height: 180px;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+}
+@media (max-width: 640px) {
+  .lc-vehicle-gallery { grid-template-columns: 1fr !important; }
+}
 </style>
+
 
 
 <style id="lc-menu-logo-fix">
 body.lc-menu-open .nav-bar .nav_logo,
 body.lc-menu-open .nav-bar-content > a.nav_logo,
 body.lc-menu-open .nav-bar-content > div > a.nav_logo {
+  display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 body.lc-menu-open .menu-content > a.nav_logo.mobile,
 body.lc-menu-open .menu-content .nav_logo.mobile {
+  display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  display: block !important;
   pointer-events: auto !important;
   z-index: 10070 !important;
   width: min(260px, 70vw) !important;
   max-width: 70vw !important;
+  height: auto !important;
   margin: 0 0 1rem !important;
   position: relative !important;
 }
 </style>
 
-</head><body class="body dark"><div class="nav is--dark"><div class="nav-bar"><div class="nav-bar-content"><div><a class="nav_logo w-inline-block" href="index.html"><div class="logo is--dark w-embed"><img alt="Luxury Club" class="logo-white" height="56" src="assets/logo-luxury-club-white.png" width="320"/><img alt="Luxury Club" class="logo-black" height="56" src="assets/logo-luxury-club-black.png" width="320"/></div></a></div><div class="menu-wrap-nav"><a class="nav-link-main hide" href="contact.html">Nous contacter</a><a class="hamburger-link w-inline-block" data-lenis-toggle="" data-w-id="34f59f88-ac6b-5b0f-4305-61e395c058d3" href="faqs.html#" id="menu-trigger"><div class="burger-lines"><div class="burger-line top is--dark"></div><div class="burger-line bottom is--dark"></div></div></a><a class="hamburger-link mobile w-inline-block" data-lenis-stop="" data-w-id="523aaac2-f619-9e3f-3a97-dde152a9f89b" href="faqs.html#" id="menu-trigger"><div class="burger-lines"><div class="burger-line top is--dark"></div><div class="burger-line bottom is--dark"></div></div></a><div class="menu-wrapper mobile"><div class="observer-vertical-hide" data-section-dark="true"></div><div class="menu-container"><div class="menu-content"><a class="nav_logo mobile _2 w-inline-block" href="index.html"><div class="logo is--dark w-embed"><img alt="Luxury Club" class="logo-white" height="56" src="assets/logo-luxury-club-white.png" width="320"/><img alt="Luxury Club" class="logo-black" height="56" src="assets/logo-luxury-club-black.png" width="320"/></div></a><img alt="" class="close-btn-mobile" data-lenis-start="" data-w-id="2cdb489b-c864-5986-83bf-fbe452f515a4" loading="lazy" src="https://cdn.prod.website-files.com/6685496347877a8a2ee2b4e9/66d81a765ec9e7c5b0963b36_close-mobile.svg"/><div class="menu-links"><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="index.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Accueil</h1><h1 class="menu-link-heading">Accueil</h1></div></a></div><div class="wrap-link-drop lc-menu-drop"><a class="wrap-link w-inline-block lc-menu-parent" href="#" data-lc-menu-toggle="1"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location de voitures <span class="lc-menu-caret">›</span></h1><h1 class="menu-link-heading">Location de voitures <span class="lc-menu-caret">›</span></h1></div></a><div class="lc-menu-children" hidden="hidden"><a class="wrap-link w-inline-block lc-menu-child"  href="current-stock.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location voiture de luxe</h1><h1 class="menu-link-heading">Location voiture de luxe</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="location-voiture-de-collection.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location voiture de collection</h1><h1 class="menu-link-heading">Location voiture de collection</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="location-voiture-mariage.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location voiture de mariage</h1><h1 class="menu-link-heading">Location voiture de mariage</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="evenementiel-automobile.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Événementiel automobile</h1><h1 class="menu-link-heading">Événementiel automobile</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="automobile-club.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Automobile Club</h1><h1 class="menu-link-heading">Automobile Club</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="bespoke-builds.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Séjour de Luxe</h1><h1 class="menu-link-heading">Séjour de Luxe</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="restoration.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Conciergerie gardiennage Automobile</h1><h1 class="menu-link-heading">Conciergerie gardiennage Automobile</h1></div></a></div></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="upgrades.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Voitures avec chauffeur</h1><h1 class="menu-link-heading">Voitures avec chauffeur</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="projects.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Yachts</h1><h1 class="menu-link-heading">Yachts</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="about-us.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">À propos</h1><h1 class="menu-link-heading">À propos</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="contact.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Contact</h1><h1 class="menu-link-heading">Contact</h1></div></a></div><div class="spacer-large"></div></div><div class="div-block-18"><a class="link-2" href="newsletter.html">Newsletter</a><a class="link-2" href="faqs.html">FAQ</a><a class="link-2" href="livre-dor.html">Livre d'or</a><a class="link-2" href="gallery.html">Référence</a><a class="link-2" href="https://blog.luxury-club.fr/" target="_blank" rel="noopener">Blog</a><a class="link-2" href="nos-partenaires.html">Nos partenaires</a></div></div></div></div></div></div></div></div><div class="button-class-code w-embed"><style>
+
+<style id="lc-menu-chrome-fix">
+body.lc-menu-open .nav-bar .hamburger-link,
+body.lc-menu-open .div-block-108 > .hamburger-link {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.lc-menu-open .menu-content .close-btn-mobile,
+body.lc-menu-open .close-btn-mobile {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10090 !important;
+  position: relative !important;
+}
+</style>
+
+
+
+<style id="lc-menu-layout-fix">
+.menu-content { position: relative !important; padding-top: 1rem !important; }
+.menu-content > a.nav_logo.mobile {
+  display: block !important;
+  margin: 0 3.75rem 1.5rem 0 !important;
+  width: min(260px, 70vw) !important;
+}
+.menu-content > img.close-btn-mobile,
+.menu-content img.close-btn-mobile,
+img.close-btn-mobile {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: 28px !important;
+  height: 28px !important;
+  max-width: 28px !important;
+  z-index: 10095 !important;
+  margin: 0 !important;
+  transform: none !important;
+  inset: auto 1rem auto auto !important;
+}
+.menu-links { clear: both !important; }
+.menu-link-heading { color: #f5f5f5 !important; opacity: 1 !important; }
+.wrap-menu-link .menu-link-heading + .menu-link-heading { display: none !important; }
+</style>
+
+</head><body class="body dark"><div class="nav is--dark"><div class="nav-bar"><div class="nav-bar-content"><div><a class="nav_logo w-inline-block" href="index.html"><div class="logo is--dark w-embed"><img alt="Luxury Club" class="logo-white" height="56" src="assets/logo-luxury-club-white.png" width="320"/><img alt="Luxury Club" class="logo-black" height="56" src="assets/logo-luxury-club-black.png" width="320"/></div></a></div><div class="menu-wrap-nav"><a class="nav-link-main hide" href="contact.html">Nous contacter</a><a class="hamburger-link w-inline-block" data-lenis-toggle="" data-w-id="34f59f88-ac6b-5b0f-4305-61e395c058d3" href="faqs.html#" id="menu-trigger"><div class="burger-lines"><div class="burger-line top is--dark"></div><div class="burger-line bottom is--dark"></div></div></a><a class="hamburger-link mobile w-inline-block" data-lenis-stop="" data-w-id="523aaac2-f619-9e3f-3a97-dde152a9f89b" href="faqs.html#" id="menu-trigger"><div class="burger-lines"><div class="burger-line top is--dark"></div><div class="burger-line bottom is--dark"></div></div></a><div class="menu-wrapper mobile"><div class="observer-vertical-hide" data-section-dark="true"></div><div class="menu-container"><div class="menu-content"><a class="nav_logo mobile _2 w-inline-block" href="index.html"><div class="logo is--dark w-embed"><img alt="Luxury Club" class="logo-white" height="56" src="assets/logo-luxury-club-white.png" width="320"/><img alt="Luxury Club" class="logo-black" height="56" src="assets/logo-luxury-club-black.png" width="320"/></div></a><img style="position:absolute;top:1rem;right:1rem;left:auto;bottom:auto;width:28px;height:28px;z-index:10095;margin:0;transform:none;" alt="" class="close-btn-mobile" data-lenis-start="" data-w-id="2cdb489b-c864-5986-83bf-fbe452f515a4" loading="lazy" src="https://cdn.prod.website-files.com/6685496347877a8a2ee2b4e9/66d81a765ec9e7c5b0963b36_close-mobile.svg"/><div class="menu-links"><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="index.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Accueil</h1><h1 class="menu-link-heading">Accueil</h1></div></a></div><div class="wrap-link-drop lc-menu-drop"><a class="wrap-link w-inline-block lc-menu-parent" href="#" data-lc-menu-toggle="1"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location de voitures <span class="lc-menu-caret">›</span></h1><h1 class="menu-link-heading">Location de voitures <span class="lc-menu-caret">›</span></h1></div></a><div class="lc-menu-children" hidden="hidden"><a class="wrap-link w-inline-block lc-menu-child"  href="current-stock.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location voiture de luxe</h1><h1 class="menu-link-heading">Location voiture de luxe</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="location-voiture-de-collection.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location voiture de collection</h1><h1 class="menu-link-heading">Location voiture de collection</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="location-voiture-mariage.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Location voiture de mariage</h1><h1 class="menu-link-heading">Location voiture de mariage</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="evenementiel-automobile.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Événementiel automobile</h1><h1 class="menu-link-heading">Événementiel automobile</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="automobile-club.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Automobile Club</h1><h1 class="menu-link-heading">Automobile Club</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="bespoke-builds.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Séjour de Luxe</h1><h1 class="menu-link-heading">Séjour de Luxe</h1></div></a><a class="wrap-link w-inline-block lc-menu-child"  href="restoration.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Conciergerie gardiennage Automobile</h1><h1 class="menu-link-heading">Conciergerie gardiennage Automobile</h1></div></a></div></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="upgrades.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Voitures avec chauffeur</h1><h1 class="menu-link-heading">Voitures avec chauffeur</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="projects.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Yachts</h1><h1 class="menu-link-heading">Yachts</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="about-us.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">À propos</h1><h1 class="menu-link-heading">À propos</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block"  href="contact.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Contact</h1><h1 class="menu-link-heading">Contact</h1></div></a></div><div class="spacer-large"></div></div><div class="div-block-18"><a class="link-2" href="newsletter.html">Newsletter</a><a class="link-2" href="faqs.html">FAQ</a><a class="link-2" href="livre-dor.html">Livre d'or</a><a class="link-2" href="gallery.html">Référence</a><a class="link-2" href="https://blog.luxury-club.fr/" target="_blank" rel="noopener">Blog</a><a class="link-2" href="nos-partenaires.html">Nos partenaires</a></div></div></div></div></div></div></div></div><div class="button-class-code w-embed"><style>
 
 .btn {
 	pointer-events: auto;
@@ -748,7 +838,9 @@ document.addEventListener("click", function (e) {
 
 <script id="lc-ux-fix-js">
 (function () {
+  var forced = null; // null = auto, true/false = forced after click
   function menuLooksOpen() {
+    if (forced !== null) return forced;
     if (document.documentElement.classList.contains('lenis-stopped')) return true;
     var obs = document.querySelector('.observer-vertical-hide');
     if (obs) {
@@ -766,25 +858,32 @@ document.addEventListener("click", function (e) {
         if (op > 0.2) return true;
       }
     }
-    return false;
+    return document.body.classList.contains('lc-menu-open');
   }
-  function syncMenuOpen(force) {
-    var open = (typeof force === 'boolean') ? force : menuLooksOpen();
-    document.body.classList.toggle('lc-menu-open', !!open);
+  function syncMenuOpen() {
+    document.body.classList.toggle('lc-menu-open', !!menuLooksOpen());
   }
+  document.addEventListener('click', function (e) {
+    var openBtn = e.target.closest('#menu-trigger, .hamburger-link, [data-lenis-toggle], [data-lenis-stop]');
+    var closeBtn = e.target.closest('.close-btn-mobile, [data-lenis-start]');
+    if (openBtn && !closeBtn) {
+      forced = true;
+      document.body.classList.add('lc-menu-open');
+      setTimeout(syncMenuOpen, 40);
+      setTimeout(syncMenuOpen, 300);
+    }
+    if (closeBtn) {
+      forced = false;
+      document.body.classList.remove('lc-menu-open');
+      setTimeout(function () { forced = null; syncMenuOpen(); }, 400);
+    }
+  }, true);
   var mo = new MutationObserver(function () { syncMenuOpen(); });
   mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
   document.querySelectorAll('.observer-vertical-hide, .menu-wrapper, .menu-container').forEach(function (el) {
     mo.observe(el, { attributes: true, attributeFilter: ['style', 'class'] });
   });
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('#menu-trigger, .hamburger-link, .close-btn-mobile, [data-lenis-toggle], [data-lenis-stop], [data-lenis-start]')) {
-      setTimeout(function () { syncMenuOpen(); }, 30);
-      setTimeout(function () { syncMenuOpen(); }, 200);
-      setTimeout(function () { syncMenuOpen(); }, 500);
-    }
-  });
-  setInterval(function () { syncMenuOpen(); }, 600);
+  setInterval(syncMenuOpen, 800);
   syncMenuOpen();
 
   function initFilters(root) {
@@ -842,5 +941,30 @@ document.addEventListener("click", function (e) {
 })();
 </script>
 
+
+
+
+<script id="lc-menu-chrome-js">
+(function(){
+  function placeClose(){
+    document.querySelectorAll('.close-btn-mobile').forEach(function(el){
+      el.style.setProperty('position','absolute','important');
+      el.style.setProperty('top','1rem','important');
+      el.style.setProperty('right','1rem','important');
+      el.style.setProperty('left','auto','important');
+      el.style.setProperty('bottom','auto','important');
+      el.style.setProperty('width','28px','important');
+      el.style.setProperty('height','28px','important');
+      el.style.setProperty('z-index','10095','important');
+      el.style.setProperty('margin','0','important');
+      el.style.setProperty('transform','none','important');
+    });
+    var mc=document.querySelector('.menu-content');
+    if(mc) mc.style.setProperty('position','relative','important');
+  }
+  placeClose();
+  document.addEventListener('click', function(){ setTimeout(placeClose, 30); });
+})();
+</script>
 
 </body></html>
