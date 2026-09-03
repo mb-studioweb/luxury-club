@@ -88,7 +88,7 @@ width: 60px; /* Set width */
 
 </style>
 <style id="lc-logo-style">
-/* Logos PNG — taille navbar normale, sans overlay fixe */
+/* Logos PNG navbar — taille compacte */
 .logo.w-embed {
   display: block;
   width: 100%;
@@ -98,7 +98,7 @@ width: 60px; /* Set width */
 .logo.w-embed img {
   width: 100%;
   height: auto;
-  max-width: 100%;
+  max-height: 22px;
   object-fit: contain;
   display: block;
 }
@@ -107,57 +107,75 @@ width: 60px; /* Set width */
 .logo.is--dark img.logo-white { display: block; }
 .logo.is--dark img.logo-black { display: none; }
 
-/* Masquer le logo hero sticky/fixe qui gênait slides + nav */
+/* Cache complètement le 2e logo (nav-home) */
+.nav-home,
 .nav-home.is--dark.home.padding-global,
-.nav_logo_home {
+.nav_logo_home,
+a.nav_logo_home {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
   width: 0 !important;
   height: 0 !important;
+  max-height: 0 !important;
   overflow: hidden !important;
   opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
 
-/* Force visible même si Webflow IX met height:0 */
 html.w-mod-js [data-w-id="86a7f071-6054-8053-f8d4-1cbdd96bc5cd"],
 html.w-mod-js:not(.w-mod-ix) [data-w-id="86a7f071-6054-8053-f8d4-1cbdd96bc5cd"] {
   height: auto !important;
+  max-height: none !important;
   opacity: 1 !important;
   display: block !important;
 }
-/* Logo navbar toujours visible le long du scroll */
+
+/* Logo navbar petit et stable */
 .nav_logo,
 .nav_logo.hidden,
 .nav_logo.w--current,
 .nav_logo.hidden.w--current {
   display: block !important;
   height: auto !important;
-  width: 180px !important;
-  max-width: 46vw !important;
+  width: 150px !important;
+  max-width: 42vw !important;
   overflow: visible !important;
   opacity: 1 !important;
   visibility: visible !important;
   z-index: 1000 !important;
 }
 .nav_logo .logo.w-embed { width: 100%; }
+.nav_logo .logo.w-embed img { max-height: 20px; }
 
 .footer-logo.w-embed { display: block; width: 100%; }
 .footer-logo.w-embed img {
-  width: min(100%, 720px);
+  width: min(100%, 520px);
+  max-height: 48px;
   height: auto;
   object-fit: contain;
   display: block;
   margin: 0 auto;
 }
 
+/* Hero : un seul libellé visible (évite le tas de textes superposés) */
+.tabs-menu-demo.hero .tab-button-demo .hero-text {
+  display: none !important;
+}
+.tabs-menu-demo.hero .tab-button-demo.w--current .hero-text,
+.tabs-menu-demo.hero .tab-button-demo.w--current .hero-text.hero {
+  display: block !important;
+}
+
 @media (max-width: 767px) {
   .nav_logo,
   .nav_logo.hidden,
   .nav_logo.w--current {
-    width: 140px !important;
-    max-width: 55vw !important;
+    width: 120px !important;
+    max-width: 45vw !important;
   }
+  .nav_logo .logo.w-embed img { max-height: 16px; }
 }
 </style>
 </head><body class="body dark" data-section-black="true"><div class="w-embed"><style>
