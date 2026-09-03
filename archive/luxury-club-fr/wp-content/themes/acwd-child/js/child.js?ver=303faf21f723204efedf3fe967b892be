@@ -1,0 +1,372 @@
+jQuery(document).ready(function () {
+    var scrollTopValue = "0";
+    jQuery(window).scroll(function () {  // au scroll de la page - effetdu bouton
+        if (jQuery('#scrollTopAnchor').length) {
+            scrollTopValue = jQuery('#scrollTopAnchor').position().top;
+        }
+        var scrollTopTrigger = scrollTopValue + 50;
+        if (jQuery(this).scrollTop() > scrollTopTrigger) {
+            jQuery('#toTopBtn').fadeIn();
+        } else {
+            jQuery('#toTopBtn').fadeOut();
+        }
+    });
+    jQuery('#toTopBtn').click(function () { // bouton retour top
+        if (jQuery('#scrollTopAnchor').length) {
+            scrollTopValue = jQuery('#scrollTopAnchor').position().top;
+        }
+        jQuery("html, body").animate({
+            scrollTop: scrollTopValue
+        }, 1000);
+        return false;
+    });
+
+    let menu = "closed";
+
+
+    jQuery('.js-scrollTo').on('click', function () { // Au clic sur un élément
+        var page = jQuery(this).attr('href'); // Page cible
+        var speed = 750; // Durée de l'animation (en ms)
+        jQuery('html, body').animate({scrollTop: jQuery(page).offset().top}, speed); // Go
+        return false;
+    });
+    jQuery('.btn-demande').click(function () { // Au clic de la classe cacher la modal
+        jQuery('.modal_sejour').modal('hide');
+    });
+
+
+    let filtre = [];
+    let numItems = "";
+    jQuery(function () {
+        jQuery("#slider-range").slider({ //JqueryUI slider - Barre de filtre Prix de 200 à 4000
+            range: true, //afficahge d'une barre de range
+            min: 200,
+            max: 4000,
+            step: 200, // de 200 en 200
+            values: [200, 4000],
+            slide: function (event, ui) {
+                let prixMax = '';
+                if (ui.values[1] == 4000) {
+                    prixMax = '+ ';
+                }
+                jQuery("#amount").html(ui.values[0] + "€ - " + ui.values[1] + prixMax + "€"); //affichage du montant value = les boutons gauche et droite
+                jQuery(".items-list-car").show(); //affichage de toutes les balises avec cette classe
+
+                //Au final il reste juste data-prix
+                if (filtre['type']) { // condition :dans le tableau filtre type
+                    jQuery(".items-list-car:not([data-type='" + filtre['type'] + "'])").hide(); //pour toute les balises avec le data-type X, on les cache
+                }
+                if (filtre['place']) {
+                    jQuery(".items-list-car:not([data-place='" + filtre['place'] + "'])").hide();
+                }
+                if (filtre['bagage']) {
+                    jQuery(".items-list-car:not([data-bagage='" + filtre['bagage'] + "'])").hide();
+                }
+                if (filtre['ville']) {
+                    jQuery(".items-list-car:not(." + filtre['ville'] + ")").hide();
+                }
+                if (filtre['couleur']) {
+                    jQuery(".items-list-car:not(." + filtre['couleur'] + ")").hide();
+                }
+                if (filtre['marque']) {
+                    jQuery(".items-list-car:not(." + filtre['marque'] + ")").hide();
+                }
+                if (filtre['taillemin'] && filtre['taillemax']) {
+                    //jQuery(".items-list-car:not(."+filtre['couleur']+")").hide();
+
+                    jQuery(".items-list-car").each(function (index) { // ??
+
+                        if (jQuery(this).data('taillemin') < filtre['taillemin'] || jQuery(this).data('taillemax') > filtre['taillemax']) {
+                            jQuery(this).hide();
+                        }
+                    });
+                }
+                jQuery(".items-list-car").each(function (index) { // parcours l'index (les voitures)
+
+                    if (jQuery(this).data('prix') < ui.values[0] || (jQuery(this).data('prix') > ui.values[1] && ui.values[1] < 4000)) { //la bouton gauche est inférieur ou que le bouton droit et suppére
+                        jQuery(this).hide();
+                    }
+                });
+
+                numItems = jQuery('.items-list-car:visible').length;
+                jQuery('#nb-car').html(numItems);
+                jQuery('#nb-car-btn').html(numItems);
+            }
+        });
+
+        jQuery("#amount").html(jQuery("#slider-range").slider("values", 0) + "€ - " + jQuery("#slider-range").slider("values", 1) + "+ €");
+
+
+        jQuery('.ui-widget-content').css('background-color', ' #4DD9FF');
+
+
+    });
+    jQuery(function () {
+
+        jQuery("#slider-range_ch").slider({ //JqueryUI slider - Barre de filtre Prix de 200 à 2000
+            range: true,
+            min: 500,
+            max: 2000,
+            step: 100,
+            values: [200, 2000],
+            slide: function (event, ui) {
+                jQuery("#amount_ch").html(ui.values[0] + "€ - " + ui.values[1] + "€");
+                jQuery(".items-list-car").show();
+                if (filtre['type']) {
+                    jQuery(".items-list-car:not([data-type='" + filtre['type'] + "'])").hide();
+                }
+                if (filtre['place']) {
+                    jQuery(".items-list-car:not([data-place='" + filtre['place'] + "'])").hide();
+                }
+                if (filtre['bagage']) {
+                    jQuery(".items-list-car:not([data-bagage='" + filtre['bagage'] + "'])").hide();
+                }
+                if (filtre['ville']) {
+                    jQuery(".items-list-car:not(." + filtre['ville'] + ")").hide();
+                }
+                if (filtre['couleur']) {
+                    jQuery(".items-list-car:not(." + filtre['couleur'] + ")").hide();
+                }
+                if (filtre['marque']) {
+                    jQuery(".items-list-car:not(." + filtre['marque'] + ")").hide();
+                }
+                if (filtre['taillemin'] && filtre['taillemax']) {
+                    jQuery(".items-list-car").each(function (index) {
+
+                        if (jQuery(this).data('taillemin') < filtre['taillemin'] || jQuery(this).data('taillemax') > filtre['taillemax']) {
+                            jQuery(this).hide();
+                        }
+                    });
+                }
+                jQuery(".items-list-car").each(function (index) {
+
+                    if (jQuery(this).data('prix') < ui.values[0] || jQuery(this).data('prix') > ui.values[1]) {
+                        console.log(ui.values[0] + " " + ui.values[1]);
+                        jQuery(this).hide();
+                    }
+                });
+                numItems = jQuery('.items-list-car:visible').length
+                jQuery('#nb-car').html(numItems);
+                jQuery('#nb-car-btn').html(numItems);
+            }
+        });
+        jQuery("#amount_ch").html(jQuery("#slider-range_ch").slider("values", 0) + "€ - " + jQuery("#slider-range_ch").slider("values", 1) + "€");
+
+        jQuery('.ui-widget-content').css('background-color', ' #4DD9FF');
+
+    });
+    jQuery('.ui-widget-content').css('background-color', ' #4DD9FF');
+
+    //jQuery(".items-list-car-luxe").slice(4).hide();
+
+
+    jQuery('.btn-reset').click(function () { //BTN reset filtre
+        jQuery(".items-list-car").show();
+        //jQuery(".items-list-car").slice(4).hide();
+        filtre = [];
+        jQuery('.card-body').removeClass("focus_filter");
+        jQuery('.f-nouveaute').removeClass("focus_filter");
+
+        numItems = jQuery('.items-list-car:visible').length
+        jQuery('#nb-car').html(numItems);
+        jQuery('#nb-car-btn').html(numItems);
+        jQuery("#checknouveaute").prop("checked", false);
+    });
+
+    jQuery('.f-type').click(function () { // au clic d'une valeur du tableau f-type On clique sur un type autre que celui selection on lui retire la classe
+        filtre['type'] = jQuery(this).data('type');
+        jQuery('.f-type').removeClass("focus_filter");
+    });
+
+    // jQuery('.f-nouveaute').click(function(){
+    //    filtre['nouveaute']=jQuery(this).data('nouveaute');
+    //    jQuery('.f-nouveaute').removeClass("focus_filter");
+    // });
+    /*jQuery(".f-nouveaute").click(function () {
+        //au clique de la case nouveauté si appuyer alors cocher si non supp (REMOVEFILTER)
+        if (jQuery("#checknouveaute").is(':checked')) {
+
+            jQuery("#checknouveaute").prop("checked", false);
+            filtre['nouveaute'] = "";
+            jQuery('.f-nouveaute').removeClass("focus_filter");
+
+            // console.log("checked");
+        } else {
+            filtre['nouveaute'] = "actif";
+            // console.log('non check');
+            jQuery("#checknouveaute").prop("checked", true);
+        }
+
+    });
+*/
+    jQuery('.f-place').click(function () {
+        filtre['place'] = jQuery(this).data('place');
+        jQuery('.f-place').removeClass("focus_filter");
+    });
+    jQuery('.f-ville').click(function () {
+        filtre['ville'] = jQuery(this).data('ville');
+        jQuery('.f-ville').removeClass("focus_filter");
+    });
+
+    jQuery('.f-couleur').click(function () {
+        filtre['couleur'] = jQuery(this).data('couleur').toLowerCase();
+        jQuery('.f-couleur').removeClass("focus_filter");
+
+    });
+    jQuery('.f-bagage').click(function () {
+        filtre['bagage'] = jQuery(this).data('bagage');
+        jQuery('.f-bagage').removeClass("focus_filter");
+    });
+    jQuery('.owl-item').click(function () {
+        filtre['marque'] = jQuery(this).data('marque');
+        jQuery('.f-marque').removeClass("focus_filter");
+    });
+    jQuery('.f-marque').click(function () {
+        filtre['marque'] = jQuery(this).data('marque');
+        jQuery('.f-marque').removeClass("focus_filter");
+    });
+    jQuery('.f-taille').click(function () {
+        filtre['taillemin'] = jQuery(this).data('taillemin');
+        filtre['taillemax'] = jQuery(this).data('taillemax');
+        jQuery('.f-taille').removeClass("focus_filter");
+    });
+    jQuery('.f-prix_yacht').click(function () {
+        filtre['prixmin'] = jQuery(this).data('prixmin');
+        filtre['prixmax'] = jQuery(this).data('prixmax');
+        jQuery('.f-prix_yacht').removeClass("focus_filter");
+    });
+
+
+    jQuery(".arg-filtre").children('.card').click(function () {
+
+        jQuery(".items-list-car").show();
+        if (filtre['type']) {
+            jQuery(".items-list-car-ch:not(." + filtre['type'] + ")").hide();
+
+            jQuery(".items-list-car-luxe:not([data-type='" + filtre['type'] + "'])").hide();
+            jQuery(".f-type[data-type='" + filtre['type'] + "']").addClass("focus_filter");
+
+        }
+        if (filtre['place']) {
+            jQuery(".items-list-car:not([data-place='" + filtre['place'] + "'])").hide();
+            jQuery(".f-place[data-place='" + filtre['place'] + "']").addClass("focus_filter");
+        }
+
+        if (filtre['ville']) {
+            if (filtre['ville'] == 'Saintrop') {
+                jQuery(".items-list-car:not(.Cannes)").hide();
+                console.log("test saint trop");
+            } else {
+                jQuery(".items-list-car:not(." + filtre['ville'] + ")").hide();
+
+            }
+            jQuery(".f-ville[data-ville='" + filtre['ville'] + "']").addClass("focus_filter");
+        }
+        if (filtre['couleur']) {
+            jQuery(".items-list-car:not(." + filtre['couleur'] + ")").hide();
+            jQuery(".f-couleur[data-couleur='" + filtre['couleur'] + "']").addClass("focus_filter");
+        }
+        if (filtre['bagage']) {
+            jQuery(".items-list-car:not([data-bagage='" + filtre['bagage'] + "'])").hide();
+            jQuery(".f-bagage[data-bagage='" + filtre['bagage'] + "']").addClass("focus_filter");
+        }
+        if (filtre['marque']) {
+            jQuery(".items-list-car:not([data-marque='" + filtre['marque'] + "'])").hide();
+            jQuery(".f-marque[data-marque='" + filtre['marque'] + "']").addClass("focus_filter");
+        }
+        if (filtre['nouveaute']) {
+            jQuery(".items-list-car:not([data-nouveaute='" + filtre['nouveaute'] + "'])").hide();
+            jQuery(".f-nouveaute[data-nouveaute='" + filtre['nouveaute'] + "']").addClass("focus_filter");
+        }
+
+        if (filtre['taillemin'] && filtre['taillemax']) {
+
+            jQuery(".items-list-car").each(function (index) {
+                if (jQuery(this).data('longueur') < filtre['taillemin'] || jQuery(this).data('longueur') > filtre['taillemax']) {
+                    jQuery(this).hide();
+                }
+            });
+            jQuery(".f-taille[data-taillemin='" + filtre['taillemin'] + "']").addClass("focus_filter");
+        }
+        if (filtre['prixmin'] && filtre['prixmax']) {
+
+            jQuery(".items-list-car").each(function (index) {
+                if (jQuery(this).data('prix') < filtre['prixmin'] || jQuery(this).data('prix') > filtre['primax']) {
+                    jQuery(this).hide();
+                }
+            });
+            jQuery(".f-prix_yacht[data-prixmin='" + filtre['prixmin'] + "']").addClass("focus_filter");
+        }
+
+
+        jQuery("#slider-range").slider({
+
+            values: [200, 30000],
+
+        });
+
+        numItems = jQuery('.items-list-car:visible').length;
+        jQuery('#nb-car').html(numItems);
+        jQuery('#nb-car-btn').html(numItems);
+    });
+    jQuery(".owl-item").click(function () {
+
+        jQuery(".items-list-car").show();
+        if (filtre['type']) {
+            jQuery(".items-list-car:not(." + filtre['type'] + ")").hide();
+            //jQuery(".items-list-car:not([data-type='"+filtre['type']+"'])").hide();
+            jQuery(".f-type[data-type='" + filtre['type'] + "']").addClass("focus_filter");
+
+        }
+        if (filtre['place']) {
+            jQuery(".items-list-car:not([data-place='" + filtre['place'] + "'])").hide();
+            jQuery(".f-place[data-place='" + filtre['place'] + "']").addClass("focus_filter");
+        }
+
+        if (filtre['ville']) {
+            jQuery(".items-list-car:not(." + filtre['ville'] + ")").hide();
+            jQuery(".f-ville[data-ville='" + filtre['ville'] + "']").addClass("focus_filter");
+        }
+        if (filtre['couleur']) {
+            jQuery(".items-list-car:not(." + filtre['couleur'] + ")").hide();
+            jQuery(".f-couleur[data-couleur='" + filtre['couleur'] + "']").addClass("focus_filter");
+        }
+        if (filtre['bagage']) {
+            jQuery(".items-list-car:not([data-bagage='" + filtre['bagage'] + "'])").hide();
+            jQuery(".f-bagage[data-bagage='" + filtre['bagage'] + "']").addClass("focus_filter");
+        }
+        if (filtre['marque']) {
+            jQuery(".items-list-car:not([data-marque='" + filtre['marque'] + "'])").hide();
+            // jQuery(".f-marque[data-marque='"+filtre['marque']+"']").addClass("focus_filter");
+        }
+
+        if (filtre['taillemin'] && filtre['taillemax']) {
+
+            jQuery(".items-list-car").each(function (index) {
+                if (jQuery(this).data('longueur') < filtre['taillemin'] || jQuery(this).data('longueur') > filtre['taillemax']) {
+                    jQuery(this).hide();
+                }
+            });
+            jQuery(".f-taille[data-taillemin='" + filtre['taillemin'] + "']").addClass("focus_filter");
+        }
+
+        jQuery("#slider-range").slider({
+
+            values: [200, 30000],
+
+        });
+        numItems = jQuery('.items-list-car:visible').length;
+        jQuery('#nb-car').html(numItems);
+        jQuery('#nb-car-btn').html(numItems);
+    });
+
+
+    jQuery('#modal_covid').modal('show');
+
+    jQuery('.marques_chauffeur').on('click', function () { // Au clic sur un élément
+        var page = jQuery(this).attr('href'); // Page cible
+        var speed = 750; // Durée de l'animation (en ms)
+        jQuery('html, body').animate({scrollTop: jQuery(page).offset().top}, speed); // Go
+        return false;
+    });
+});

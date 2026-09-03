@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+archive/luxury-club-fr/wp-json/
+archive/luxury-club-fr/comments/
+archive/luxury-club-fr/**/feed/
+archive/luxury-club-fr/en/

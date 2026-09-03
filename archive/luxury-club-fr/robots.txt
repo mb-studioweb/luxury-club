@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /wp-login.php
+Disallow: */trackback
+Disallow: /*/comments
+Disallow: /cgi-bin
+Disallow: /*.inc$
+Disallow: /*.gz
+Disallow: /*.cgi
+Disallow: /*?s=
+
+User-agent: Googlebot-Image
+Disallow:
+
+User-agent: Mediapartners-Google
+Disallow:
+
+Sitemap: https://www.luxury-club.fr/sitemap_index.xml
