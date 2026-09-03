@@ -88,16 +88,83 @@ width: 60px; /* Set width */
 
 </style>
 <style id="lc-logo-style">
-.logo.w-embed { display:flex; align-items:center; height:100%; }
-.logo.w-embed img { height:14px; width:auto; max-width:180px; object-fit:contain; display:block; }
-.logo.w-embed img.logo-white { display:none; }
-.logo.w-embed img.logo-black { display:block; }
-.logo.is--dark img.logo-white { display:block; }
-.logo.is--dark img.logo-black { display:none; }
-.footer-logo.w-embed { display:block; width:100%; }
-.footer-logo.w-embed img { width:100%; height:auto; max-height:76px; object-fit:contain; display:block; }
+/* Remplit le conteneur Webflow (GSAP anime la largeur du parent sur le hero) */
+.logo.w-embed {
+  display: block;
+  width: 100%;
+  height: auto;
+  line-height: 0;
+}
+.logo.w-embed img {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
+.logo.w-embed img.logo-white { display: none; }
+.logo.w-embed img.logo-black { display: block; }
+.logo.is--dark img.logo-white { display: block; }
+.logo.is--dark img.logo-black { display: none; }
+
+/* Hero : logo bien visible dès le premier viewport */
+.nav-home.is--dark.home.padding-global {
+  z-index: 200 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none;
+}
+.nav_logo_home,
+.nav_logo_home.w--current {
+  opacity: 1 !important;
+  visibility: visible !important;
+  min-width: min(72vw, 820px);
+  width: min(72vw, 820px);
+  max-width: 90vw;
+}
+.nav_logo_home .logo.w-embed,
+.nav_logo_home .logo.w-embed img {
+  width: 100%;
+}
+
+/* Navbar sticky après scroll : plus lisible que 14px */
+.nav_logo,
+.nav_logo.hidden,
+.nav_logo.w--current,
+.nav_logo.hidden.w--current {
+  width: 220px !important;
+  max-width: 40vw !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+.nav_logo .logo.w-embed {
+  width: 100%;
+}
+
+.footer-logo.w-embed {
+  display: block;
+  width: 100%;
+}
+.footer-logo.w-embed img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+}
+
 @media (max-width: 767px) {
-  .logo.w-embed img { height:12px; max-width:140px; }
+  .nav_logo_home,
+  .nav_logo_home.w--current {
+    min-width: min(85vw, 520px);
+    width: min(85vw, 520px);
+  }
+  .nav_logo,
+  .nav_logo.hidden,
+  .nav_logo.w--current {
+    width: 160px !important;
+    max-width: 55vw !important;
+  }
 }
 </style>
 </head><body class="body dark" data-section-black="true"><div class="w-embed"><style>

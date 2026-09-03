@@ -96,16 +96,83 @@ html, body {
 }
 </style>
 <style id="lc-logo-style">
-.logo.w-embed { display:flex; align-items:center; height:100%; }
-.logo.w-embed img { height:14px; width:auto; max-width:180px; object-fit:contain; display:block; }
-.logo.w-embed img.logo-white { display:none; }
-.logo.w-embed img.logo-black { display:block; }
-.logo.is--dark img.logo-white { display:block; }
-.logo.is--dark img.logo-black { display:none; }
-.footer-logo.w-embed { display:block; width:100%; }
-.footer-logo.w-embed img { width:100%; height:auto; max-height:76px; object-fit:contain; display:block; }
+/* Remplit le conteneur Webflow (GSAP anime la largeur du parent sur le hero) */
+.logo.w-embed {
+  display: block;
+  width: 100%;
+  height: auto;
+  line-height: 0;
+}
+.logo.w-embed img {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
+.logo.w-embed img.logo-white { display: none; }
+.logo.w-embed img.logo-black { display: block; }
+.logo.is--dark img.logo-white { display: block; }
+.logo.is--dark img.logo-black { display: none; }
+
+/* Hero : logo bien visible dès le premier viewport */
+.nav-home.is--dark.home.padding-global {
+  z-index: 200 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none;
+}
+.nav_logo_home,
+.nav_logo_home.w--current {
+  opacity: 1 !important;
+  visibility: visible !important;
+  min-width: min(72vw, 820px);
+  width: min(72vw, 820px);
+  max-width: 90vw;
+}
+.nav_logo_home .logo.w-embed,
+.nav_logo_home .logo.w-embed img {
+  width: 100%;
+}
+
+/* Navbar sticky après scroll : plus lisible que 14px */
+.nav_logo,
+.nav_logo.hidden,
+.nav_logo.w--current,
+.nav_logo.hidden.w--current {
+  width: 220px !important;
+  max-width: 40vw !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+.nav_logo .logo.w-embed {
+  width: 100%;
+}
+
+.footer-logo.w-embed {
+  display: block;
+  width: 100%;
+}
+.footer-logo.w-embed img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+}
+
 @media (max-width: 767px) {
-  .logo.w-embed img { height:12px; max-width:140px; }
+  .nav_logo_home,
+  .nav_logo_home.w--current {
+    min-width: min(85vw, 520px);
+    width: min(85vw, 520px);
+  }
+  .nav_logo,
+  .nav_logo.hidden,
+  .nav_logo.w--current {
+    width: 160px !important;
+    max-width: 55vw !important;
+  }
 }
 </style>
 </head><body><div class="dark-page-wrapper overflow-hidden"><div class="nav is--dark"><div class="nav-bar"><div class="nav-bar-content"><div><a class="nav_logo w-inline-block" href="../index.html"><div class="logo is--dark w-embed"><img alt="Luxury Club" class="logo-white" height="37" src="../assets/logo-luxury-club-white.png" width="220"/><img alt="Luxury Club" class="logo-black" height="37" src="../assets/logo-luxury-club-black.png" width="220"/></div></a></div><div class="menu-wrap-nav"><a class="nav-link-main hide" href="../contact.html">Nous contacter</a><a class="hamburger-link w-inline-block" data-lenis-toggle="" data-w-id="34f59f88-ac6b-5b0f-4305-61e395c058d3" href="luxury-club-evolution.html#" id="menu-trigger"><div class="burger-lines"><div class="burger-line top is--dark"></div><div class="burger-line bottom is--dark"></div></div></a><a class="hamburger-link mobile w-inline-block" data-lenis-stop="" data-w-id="523aaac2-f619-9e3f-3a97-dde152a9f89b" href="luxury-club-evolution.html#" id="menu-trigger"><div class="burger-lines"><div class="burger-line top is--dark"></div><div class="burger-line bottom is--dark"></div></div></a><div class="menu-wrapper mobile"><div class="observer-vertical-hide" data-section-dark="true"></div><div class="menu-container"><div class="menu-content"><a class="nav_logo mobile _2 w-inline-block" href="../index.html"><div class="logo is--dark w-embed"><img alt="Luxury Club" class="logo-white" height="37" src="../assets/logo-luxury-club-white.png" width="220"/><img alt="Luxury Club" class="logo-black" height="37" src="../assets/logo-luxury-club-black.png" width="220"/></div></a><img alt="Mercedes CLE Cabriolet" class="close-btn-mobile" data-lenis-start="" data-w-id="2cdb489b-c864-5986-83bf-fbe452f515a4" loading="lazy" src="https://www.luxury-club.fr/wp-content/uploads/2025/03/Mercedes-Benz-CLE_Cabriolet-1.webp"/><div class="menu-links"><div class="wrap-link-drop"><a class="wrap-link w-inline-block" data-target="bespoke-builds" href="../bespoke-builds.html"><div class="wrap-menu-link"><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div><h1 class="menu-link-heading">Séjours de luxe</h1><h1 class="menu-link-heading">Séjours de luxe</h1></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block" data-target="projects" href="../projects.html"><div class="wrap-menu-link"><h1 class="menu-link-heading">Location yacht</h1><h1 class="menu-link-heading">Location yacht</h1><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block" data-target="dealership" href="../current-stock.html"><div class="wrap-menu-link"><h1 class="menu-link-heading">Location voiture</h1><h1 class="menu-link-heading">Location voiture</h1><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div></div></a><a class="wrap-link w-inline-block" data-target="dealership" href="../evenementiel-automobile.html"><div class="wrap-menu-link"><h1 class="menu-link-heading">Événementiel</h1><h1 class="menu-link-heading">Événementiel</h1><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div></div></a><a class="wrap-link w-inline-block" data-target="dealership" href="../location-voiture-mariage.html"><div class="wrap-menu-link"><h1 class="menu-link-heading">Mariage</h1><h1 class="menu-link-heading">Mariage</h1><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block" href="../about-us.html"><div class="wrap-menu-link"><h1 class="menu-link-heading">À propos</h1><h1 class="menu-link-heading">À propos</h1><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div></div></a></div><div class="wrap-link-drop"><a class="wrap-link w-inline-block" href="../contact.html"><div class="wrap-menu-link"><h1 class="menu-link-heading">Contact</h1><h1 class="menu-link-heading">Contact</h1><div class="underline-w"><div class="underline-fill"></div><div class="underline-underlay"></div></div></div></a></div><div class="spacer-large"></div><div class="div-block-18"><a class="link-2" href="../restoration.html">Conciergerie</a><a class="link-2" href="../faqs.html">FAQ</a><a class="link-2" href="../upgrades.html">Avec chauffeur</a><a class="link-2" href="../models.html">Marques</a><a class="link-2" href="../gallery.html">Références</a></div></div></div></div></div></div></div></div><div class="button-class-code w-embed"><style>
