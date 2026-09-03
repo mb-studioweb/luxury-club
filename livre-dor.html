@@ -479,6 +479,7 @@ section.footer.padding-global {
   display: block !important;
   width: 100% !important;
   background: #000 !important;
+  color: #fff !important;
 }
 section.footer .footer-links-full-wrapper {
   display: grid !important;
@@ -511,7 +512,22 @@ section.footer .footer-link {
   position: relative !important;
   inset: auto !important;
 }
-section.footer .footer-link { color: inherit; }
+section.footer .footer-head {
+  color: rgba(255,255,255,.75) !important;
+}
+section.footer .footer-link,
+section.footer .footer-links-wrap,
+section.footer .footer-column,
+section.footer .checkbox-label,
+section.footer .text-color-alternate {
+  color: #fff !important;
+}
+section.footer .footer-link { text-decoration: none; }
+section.footer .name-input,
+section.footer .email-input {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.35) !important;
+}
 section.footer .footer-logo.w-embed,
 section.footer .footer-logo.w-embed img {
   display: block !important;
@@ -531,12 +547,19 @@ section.footer .footer-logo.w-embed img {
 .menu-wrapper.mobile {
   position: fixed !important;
   inset: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   width: 100% !important;
   height: 100% !important;
   max-width: none !important;
   z-index: 9998 !important;
   overflow: hidden !important;
   background: transparent !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  translate: none !important;
 }
 body:not(.lc-menu-open) .menu-wrapper,
 body:not(.lc-menu-open) .menu-wrapper.mobile {
@@ -550,6 +573,10 @@ body.lc-menu-open .menu-wrapper.mobile {
   opacity: 1 !important;
   pointer-events: auto !important;
   display: block !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  left: 0 !important;
+  top: 0 !important;
 }
 body.lc-menu-open .menu-container,
 body.lc-menu-open .menu-content {
@@ -557,12 +584,15 @@ body.lc-menu-open .menu-content {
   opacity: 1 !important;
   display: flex !important;
   flex-direction: column !important;
+  transform: none !important;
+  left: 0 !important;
 }
 .menu-wrapper .menu-container {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  transform: none !important;
 }
 .menu-wrapper .observer-vertical-hide {
   background: #000 !important;
@@ -583,9 +613,14 @@ body.lc-menu-open .observer-vertical-hide {
   justify-content: flex-start !important;
   height: 100% !important;
   max-height: 100dvh !important;
+  padding-top: 4.25rem !important;
+  box-sizing: border-box !important;
 }
 body.lc-menu-open {
   overflow: hidden !important;
+}
+body.lc-menu-open .nav {
+  z-index: 10002 !important;
 }
 body.lc-menu-open .hamburger-link {
   visibility: hidden !important;
@@ -595,12 +630,14 @@ body.lc-menu-open .hamburger-link {
   position: fixed !important;
   top: max(0.9rem, env(safe-area-inset-top)) !important;
   right: 1.1rem !important;
-  z-index: 10001 !important;
+  left: auto !important;
+  z-index: 10003 !important;
   width: 28px !important;
   height: 28px !important;
   cursor: pointer !important;
   display: none !important;
   pointer-events: auto !important;
+  transform: none !important;
 }
 body.lc-menu-open .menu-wrapper .close-btn-mobile {
   display: block !important;
@@ -1524,6 +1561,17 @@ document.querySelectorAll(".preloader, .preloader-bespoke").forEach(function (el
     }
     return wrap;
   }
+  function pin(el) {
+    if (!el) return;
+    el.style.setProperty("transform", "none", "important");
+    el.style.setProperty("-webkit-transform", "none", "important");
+    el.style.setProperty("left", "0px", "important");
+    el.style.setProperty("top", "0px", "important");
+    el.style.setProperty("right", "0px", "important");
+    el.style.setProperty("bottom", "0px", "important");
+    el.style.setProperty("width", "100%", "important");
+    el.style.setProperty("height", "100%", "important");
+  }
   function setMenu(on) {
     open = !!on;
     document.documentElement.classList.toggle("lenis-stopped", open);
@@ -1536,6 +1584,7 @@ document.querySelectorAll(".preloader, .preloader-bespoke").forEach(function (el
       obs.style.setProperty("-webkit-transform", t, "important");
     }
     if (w) {
+      pin(w);
       w.style.setProperty("visibility", open ? "visible" : "hidden", "important");
       w.style.setProperty("opacity", open ? "1" : "0", "important");
       w.style.setProperty("pointer-events", open ? "auto" : "none", "important");
