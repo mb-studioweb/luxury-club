@@ -1,0 +1,254 @@
+jQuery(function ($) {
+    let condition = "";
+    function updateNumberCars() {
+        let carsVisible = $('.items-list-car:visible');
+        let numItems = carsVisible.length;
+        $('#nb-car').html(numItems);
+        $('#nb-car-btn').html(numItems);
+    }
+
+    updateRangeSlide();
+
+    function updateRangeSlide() {
+        let sliderRange = $('#slider-range-filter');
+        let dataCarPrice = getDatasCars(true)['prix'];
+        let minPrice = 0;
+        let maxPrice = "";
+        let loop = 0;
+        sliderRange.parent().show();
+        // console.log(dataCarPrice);
+        $.each(dataCarPrice, function (index, value) {
+            if (value !== undefined) {
+                if (loop === 0) {
+                    minPrice = Math.floor(value /200)*200;
+
+                }
+                maxPrice = Math.floor(value /200)*200;
+                loop++;
+            }
+        });
+        if (minPrice > 4000) minPrice = 4000;
+        if (maxPrice > 4000) maxPrice = 4000;
+        sliderRange.slider({
+            range: true, //affichage d'une barre de range
+            min: minPrice,
+            max: maxPrice,
+            step: 200, // de 200 en 200
+            values: [minPrice, maxPrice],
+            slide: function (event, ui) {
+                showFilterPriceRange(ui.values[0], ui.values[1]);
+                let listCar = jQuery(".items-list-car").filter(condition);
+                if (condition === ""){
+                    listCar = jQuery(".items-list-car");
+                }
+                listCar.show();
+                listCar.each(function (index) { // parcours l'index (les voitures)
+
+                    if (jQuery(this).data('prix') < ui.values[0] || (jQuery(this).data('prix') > ui.values[1] && ui.values[1] < 4000)) { //la bouton gauche est inférieur ou que le bouton droit et suppére
+                        jQuery(this).hide();
+                    }
+                });
+                updateNumberCars();
+
+            }
+        });
+        showFilterPriceRange(minPrice, maxPrice);
+        if (minPrice === maxPrice || maxPrice == "") {
+            sliderRange.parent().hide();
+        }
+    }
+
+    // affiche la tranche de prix du filtre
+    function showFilterPriceRange(minPrice, maxPrice) {
+        jQuery("#amount-filter").html(minPrice + "€ - " + maxPrice + "+€");
+        if (maxPrice < 4000) {
+            jQuery("#amount-filter").html(minPrice + "€ - " + maxPrice + "€");
+        }
+    }
+
+    //récuperer les voitures visibles
+    function getDatasCars(visible) {
+        let selector = '';
+        if (visible) selector = ':visible';
+        let carsVisible = $(`.items-list-car${selector}`);
+        updateNumberCars()
+        //récuperes les datas des voitures et les stocker dans un tableau
+        const dataAvailable = [];
+
+        carsVisible.each(function (index) {
+            let car = $(this);
+
+            $.each($(this).data(), function (indexData, value) {
+
+                if (dataAvailable[indexData] === undefined) dataAvailable[indexData] = [];
+
+                if (car.data(indexData) !== undefined) {
+                    if (Array.isArray(car.data(indexData))) {
+                        $.each(car.data(indexData), function (key, value) {
+                            dataAvailable[indexData][value] = value;
+                        })
+                        return;
+                    }
+                    dataAvailable[indexData][car.data(indexData)] = car.data(indexData);
+/*
+                    dataAvailable[indexData].sort(function(a, b){return a-b});
+*/
+                }
+            })
+
+        });
+        return dataAvailable;
+    }
+
+    //function de mise à jours des différents dropdown en fonction des datas(entonoir)
+    function updateDropdown(typeCard = null, cardSelect = null, disableCard = null) {
+        const dropdown = $(`.dropdown-filter[data-type=${typeCard}]`);
+        const id = cardSelect.attr('id');
+
+        // console.log(cardSelect.data('nouveaute'));
+        updateRangeSlide();
+
+        if (cardSelect.data('nouveaute') === undefined) {
+            const cardSelected = dropdown.parent().find('.card-select');
+            if (cardSelected.length > 0) {
+                let id = cardSelected.attr('id');
+                dropdown.find(`#${id}`).show();
+                cardSelected.remove();
+            }
+
+            if (disableCard === null) {
+                let card = cardSelect
+                    .clone()
+                    .addClass('card-select');
+                dropdown
+                    .removeClass('show')
+                    .before(card);
+                cardSelect.hide();
+
+                return;
+            }
+            cardSelect.remove();
+            dropdown
+                .addClass('show')
+                .find(`#${id}`).show();
+        }
+    }
+
+    //function de mise à jours des différents dropdown en fonction des datas(entonoir)
+    function createDropdown() {
+        const dropdowns = $('.dropdown-filter');
+
+        dropdowns.each(function (index) {
+            const dataType = getDatasCars(false)[$(this).data('type')];
+            const dataTemp = Object.assign({}, dataType);
+            // console.log(dataTemp);
+            let dropdown = $(this);
+            let type = dropdown.data('type');
+            // console.log(type);
+            let nbCard = 0;
+
+            dropdown.empty();
+
+            // fonction qui permet de trier le tableau
+            let ordered = Object.keys(dataTemp).sort().reduce(
+                (obj, key) => {
+                    let index = key;
+                    if ("number" === dropdown.data('sort')) index = key.substring(0, /[a-z-à]/i.exec(key).index - 1).replaceAll(' ', '');
+                    obj[index] = dataTemp[key];
+                    return obj;
+                },
+                {}
+            );
+            $.each(ordered, function (indexType, value) {
+                if (value !== undefined) {
+                    nbCard += 1;
+                    let card = $('#exemple-card-' + type)
+                        .clone()
+                        .removeClass('exemple-card-dropdown')
+                        .attr('data-' + type, value)
+                        .attr('data-type-data', type)
+                        .attr('id', type + '-' + nbCard);
+
+                    card.find('.value').html(value);
+                    dropdown.append(card);
+                }
+            });
+        })
+        updateRangeSlide();
+    }
+    createDropdown();
+
+
+    $('body').on('click','.card-filter', function() {
+        condition = '';
+        let card = $(this);
+        let type = card.data('type-data');
+        let disableCard = null;
+        // Récuperation de la liste des voitures
+        let listCars = $('.items-list-car');
+
+        if (card.hasClass('new-filter')) {
+            if ($("#checknouveaute").is(':checked')) {
+                $("#checknouveaute").prop("checked", false);
+                condition = '';
+            } else {
+                $("#checknouveaute").prop("checked", true);
+                condition += '[data-nouveaute="actif"]';
+            }
+        }
+
+        // Check si le btn est deja activé
+        if (card.hasClass('card-select')) {
+            disableCard = true;
+        }
+        else if ('nouveaute' !== type){
+            if (true === $(this).data('multiple')){
+                condition += '.' + $(this).data($(this).data('type-data'));
+            } else {
+                condition += '[data-' + $(this).data('type-data') + '="' + $(this).data($(this).data('type-data')) + '"]';
+            }
+        }
+
+        if ($("#checknouveaute").length && $("#checknouveaute").is(':checked')) {
+            condition += '[data-nouveaute="actif"]';
+        }
+
+
+        // Check si d'autre element sont selectionné
+        if ($(`.card-select[data-type-data!=${type}]`).length) {
+            // Si oui on les parcours les btns selectionné
+            $(`.card-select[data-type-data!=${type}]`).each(function (index) {
+                if (true === $(this).data('multiple')){
+                    condition += '.' + $(this).data($(this).data('type-data'));
+                } else {
+                    // Pour chaque élément présent on ajoute la condition dans la variable string de condition
+                    condition += '[data-' + $(this).data('type-data') + '="' + $(this).data($(this).data('type-data')) + '"]';
+                }
+            });
+        }
+        if (condition) {
+            console.log(condition);
+            console.log($(this).data('multiple'));
+            listCars.show().not(condition).hide();
+        } else {
+            $('.card-select').removeClass('card-select');
+            listCars.show();
+        }
+
+        updateDropdown(type, card, disableCard);
+    });
+
+    $('.btn-reset').click(function () { //BTN reset filtre
+        $(".items-list-car").show();
+        $('.f-nouveaute').removeClass("focus_filter");
+        $('.card-select').remove();
+        $('.collapse').not('.collapse-range-slider').removeClass('show');
+        updateNumberCars();
+        createDropdown();
+        updateRangeSlide();
+    });
+
+    //gere les choix multiples
+    //fonction reset
+    //function d'affichage des voitures disponible
+});
