@@ -46,7 +46,6 @@ html, body {
   gtag('config', 'G-H6SGT7ELFS');
 </script><link as="image" href="https://cdn.prod.website-files.com/6685496347877a8a2ee2b4e9/67ec014a454e3102bcb0aba9_thumb%201-min.avif" rel="preload"/>
 <style id="lc-logo-style">
-/* Remplit le conteneur Webflow (GSAP anime la largeur du parent sur le hero) */
 .logo.w-embed {
   display: block;
   width: 100%;
@@ -65,63 +64,77 @@ html, body {
 .logo.is--dark img.logo-white { display: block; }
 .logo.is--dark img.logo-black { display: none; }
 
-/* Hero : logo bien visible dès le premier viewport */
+/* CRITIQUE : le logo hero était APRÈS la section 100vh → invisible sans scroll.
+   On le fixe en haut du viewport dès l'accueil. */
 .nav-home.is--dark.home.padding-global {
-  z-index: 200 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-top: 0 !important;
+  z-index: 300 !important;
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: none;
+  background: transparent !important;
+  height: auto !important;
+  padding-top: 1.75rem !important;
+  padding-bottom: 1rem !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
 }
+
 .nav_logo_home,
 .nav_logo_home.w--current {
+  pointer-events: auto !important;
   opacity: 1 !important;
   visibility: visible !important;
-  min-width: min(72vw, 820px);
-  width: min(72vw, 820px);
-  max-width: 90vw;
+  display: block !important;
+  width: min(70vw, 760px) !important;
+  max-width: 90vw !important;
+  min-width: 240px;
 }
+
 .nav_logo_home .logo.w-embed,
 .nav_logo_home .logo.w-embed img {
   width: 100%;
 }
 
-/* Navbar sticky après scroll : plus lisible que 14px */
+/* Navbar après scroll */
 .nav_logo,
 .nav_logo.hidden,
 .nav_logo.w--current,
 .nav_logo.hidden.w--current {
-  width: 220px !important;
-  max-width: 40vw !important;
+  width: 240px !important;
+  max-width: 42vw !important;
   height: auto !important;
   overflow: visible !important;
 }
-.nav_logo .logo.w-embed {
-  width: 100%;
-}
+.nav_logo .logo.w-embed { width: 100%; }
 
-.footer-logo.w-embed {
-  display: block;
-  width: 100%;
-}
+.footer-logo.w-embed { display: block; width: 100%; }
 .footer-logo.w-embed img {
   width: 100%;
   height: auto;
-  max-height: none;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 767px) {
+  .nav-home.is--dark.home.padding-global {
+    padding-top: 1.25rem !important;
+    padding-left: 1.25rem !important;
+  }
   .nav_logo_home,
   .nav_logo_home.w--current {
-    min-width: min(85vw, 520px);
-    width: min(85vw, 520px);
+    width: min(82vw, 520px) !important;
   }
   .nav_logo,
   .nav_logo.hidden,
   .nav_logo.w--current {
-    width: 160px !important;
-    max-width: 55vw !important;
+    width: 170px !important;
+    max-width: 58vw !important;
   }
 }
 </style>
@@ -435,11 +448,9 @@ $(".section.is--hero").each(function (index) {
     }
   });
   tl.fromTo(targetElement, {
-    y: "0%",
-    width: "75%"
+    width: "70%"
   }, {
-    y: "0%",
-    width: "220px",
+    width: "240px",
     duration: 1,
     ease: "none"
   });
