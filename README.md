@@ -37,6 +37,7 @@ Site principal basé sur le **style** moderne de [911 Rennsport](https://www.911
 - Le CSS/JS du design reste servi via le CDN Webflow (le style n’a pas été modifié).
 - Les images véhicules pointent vers l’archive locale ou le site Luxury Club.
 - Certains assets de l’ancien site ont pu manquer au miroir (erreurs 503).
+<<<<<<< HEAD
 
 
 ## GitHub Pages
@@ -46,3 +47,5 @@ URL prévue : **https://mb-studioweb.github.io/luxury-club/**
 1. Repo → **Settings** → **Pages**
 2. Source : **Deploy from a branch** → branche `gh-pages` → dossier `/` (ou **GitHub Actions** si tu préfères le workflow)
 3. Enregistrer — le site est en ligne en ~1 min
+=======
+>>>>>>> origin/main
