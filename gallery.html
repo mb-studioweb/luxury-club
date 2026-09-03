@@ -88,16 +88,96 @@ width: 60px; /* Set width */
 
 </style>
 <style id="lc-logo-style">
-.logo.w-embed { display:flex; align-items:center; height:100%; }
-.logo.w-embed img { height:14px; width:auto; max-width:180px; object-fit:contain; display:block; }
-.logo.w-embed img.logo-white { display:none; }
-.logo.w-embed img.logo-black { display:block; }
-.logo.is--dark img.logo-white { display:block; }
-.logo.is--dark img.logo-black { display:none; }
-.footer-logo.w-embed { display:block; width:100%; }
-.footer-logo.w-embed img { width:100%; height:auto; max-height:76px; object-fit:contain; display:block; }
+.logo.w-embed {
+  display: block;
+  width: 100%;
+  height: auto;
+  line-height: 0;
+}
+.logo.w-embed img {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
+.logo.w-embed img.logo-white { display: none; }
+.logo.w-embed img.logo-black { display: block; }
+.logo.is--dark img.logo-white { display: block; }
+.logo.is--dark img.logo-black { display: none; }
+
+/* CRITIQUE : le logo hero était APRÈS la section 100vh → invisible sans scroll.
+   On le fixe en haut du viewport dès l'accueil. */
+.nav-home.is--dark.home.padding-global {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-top: 0 !important;
+  z-index: 300 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none;
+  background: transparent !important;
+  height: auto !important;
+  padding-top: 1.75rem !important;
+  padding-bottom: 1rem !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.nav_logo_home,
+.nav_logo_home.w--current {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  width: min(70vw, 760px) !important;
+  max-width: 90vw !important;
+  min-width: 240px;
+}
+
+.nav_logo_home .logo.w-embed,
+.nav_logo_home .logo.w-embed img {
+  width: 100%;
+}
+
+/* Navbar après scroll */
+.nav_logo,
+.nav_logo.hidden,
+.nav_logo.w--current,
+.nav_logo.hidden.w--current {
+  width: 240px !important;
+  max-width: 42vw !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+.nav_logo .logo.w-embed { width: 100%; }
+
+.footer-logo.w-embed { display: block; width: 100%; }
+.footer-logo.w-embed img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 @media (max-width: 767px) {
-  .logo.w-embed img { height:12px; max-width:140px; }
+  .nav-home.is--dark.home.padding-global {
+    padding-top: 1.25rem !important;
+    padding-left: 1.25rem !important;
+  }
+  .nav_logo_home,
+  .nav_logo_home.w--current {
+    width: min(82vw, 520px) !important;
+  }
+  .nav_logo,
+  .nav_logo.hidden,
+  .nav_logo.w--current {
+    width: 170px !important;
+    max-width: 58vw !important;
+  }
 }
 </style>
 </head><body class="body dark" data-section-black="true"><div class="w-embed"><style>
